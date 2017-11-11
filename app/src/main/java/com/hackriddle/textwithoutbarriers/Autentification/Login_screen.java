@@ -1,27 +1,12 @@
-package com.hackriddle.textwithoutbarriers;
+package com.hackriddle.textwithoutbarriers.Autentification;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hackriddle.textwithoutbarriers.Functionality.Preference_Manager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
+import com.hackriddle.textwithoutbarriers.R;
 
 
 public class Login_screen extends AppCompatActivity  {

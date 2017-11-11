@@ -1,10 +1,11 @@
-package com.hackriddle.textwithoutbarriers;
+package com.hackriddle.textwithoutbarriers.Autentification;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hackriddle.textwithoutbarriers.Functionality.Preference_Manager;
+import com.hackriddle.textwithoutbarriers.R;
 
 public class Register_screen extends AppCompatActivity {
 

@@ -4,7 +4,7 @@
     android:id="@+id/Login_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hackriddle.textwithoutbarriers.Register_screen"
+    tools:context="com.hackriddle.textwithoutbarriers.Autentification.Register_screen"
     android:orientation="vertical"
     android:background="#ffffff">
 
@@ -17,7 +17,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.hackriddle.textwithoutbarriers.Register_screen"
+        tools:context="com.hackriddle.textwithoutbarriers.Autentification.Register_screen"
         android:orientation="vertical"
         android:background="#ffffff"
         android:weightSum="1">

@@ -4,7 +4,7 @@
     android:id="@+id/Login_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hackriddle.textwithoutbarriers.Login_screen">
+    tools:context="com.hackriddle.textwithoutbarriers.Autentification.Login_screen">
     android:orientation="vertical"
     android:background="#ffffff">
 

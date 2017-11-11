@@ -1,7 +1,4 @@
 package com.hackriddle.textwithoutbarriers.Functionality;
-
-
-import android.app.ProgressDialog;
 import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
@@ -15,7 +12,6 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class GetFirebaseToken extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirabaseToken";
-    private ProgressDialog progressDialog;
 
     @Override
     public void onTokenRefresh() {
