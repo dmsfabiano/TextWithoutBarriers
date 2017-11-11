@@ -12,7 +12,6 @@ public class Preference_Manager {
 
     private static final String SHARED_PREF_NAME = "mysharedpreferences";
     private static final String KEY_USER_EMAIL = "email";
-    private static final String KEY_USER_ID = "id";
     private static final String KEY_TOKEN = "usertoken";
 
     // -----------------------------------------------------------------------------
@@ -30,11 +29,10 @@ public class Preference_Manager {
 
     // -----------------------------------------------------------------------------
 
-    public boolean userLogin(int id, String email){ // Saves the information temporarily into final strings.
+    public boolean userLogin(String email){ // Saves the information temporarily into final strings.
 
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_USER_ID, id);
         editor.putString(KEY_USER_EMAIL, email);
         editor.apply();
         return true;
