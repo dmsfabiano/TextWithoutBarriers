@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "18077695311",
+    "firebase_url": "https://textwithoutbarriers-1bd9a.firebaseio.com",
+    "project_id": "textwithoutbarriers-1bd9a",
+    "storage_bucket": "textwithoutbarriers-1bd9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18077695311:android:e3423f75277c73e6",
+        "android_client_info": {
+          "package_name": "com.hackriddle.textwithoutbarriers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18077695311-bcut5htsrjmk010nbvbmbn7djmgvpjue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABhMLA9b7ptwzT2DfjuQo7c5go2eSWsnw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
