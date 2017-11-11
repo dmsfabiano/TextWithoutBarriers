@@ -1,4 +1,4 @@
-package com.hackriddle.textwithoutbarriers.Recycler;
+package com.hackriddle.textwithoutbarriers.Chat;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
