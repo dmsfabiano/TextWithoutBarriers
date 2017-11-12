@@ -14,8 +14,11 @@ import android.widget.TextView;
 
 import com.hackriddle.textwithoutbarriers.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private String[] mDataset;
+    private ArrayList<widgetData> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -23,16 +26,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public CardView mCardView;
         public TextView mTextView;
+        public TextView m2TextView;
         public MyViewHolder(View v) {
             super(v);
 
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextView = (TextView) v.findViewById(R.id.tv_text);
+            m2TextView = (TextView) v.findViewById(R.id.tv_blah);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset) {
+    public MyAdapter(ArrayList<widgetData> myDataset) {
         mDataset = myDataset;
     }
 
@@ -50,18 +55,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText(mDataset.get(position).getUser_name());
+        holder.m2TextView.setText(mDataset.get(position).getLast_message());
+
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String currentValue = mDataset[position];
-                Log.d("CardView", "CardView Clicked: " + currentValue);
+                String username = mDataset.get(position).getUser_name();
+                Log.d("CardView", "CardView Clicked: " + username);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 }
+

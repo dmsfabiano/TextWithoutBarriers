@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;;import com.hackriddle.textwithoutbarriers.R;
 
+import java.util.ArrayList;
+
 public class BlankFragment extends Fragment {
 
     public BlankFragment() {
@@ -32,7 +34,12 @@ public class BlankFragment extends Fragment {
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        MyAdapter adapter = new MyAdapter(new String[]{"test one", "test two", "test three", "test four", "test five" , "test six" , "test seven"});
+        ArrayList<widgetData> dummie_list = new ArrayList<>();
+        dummie_list.add(new widgetData("Diego","are you awake",2));
+        dummie_list.add(new widgetData("David","this is going to be awesome",3));
+        dummie_list.add(new widgetData("Stephanie"," hello world ",4));
+
+        MyAdapter adapter = new MyAdapter( dummie_list);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
