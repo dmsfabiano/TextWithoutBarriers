@@ -9,11 +9,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 fabPlus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogCustom);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
                         alert.setTitle("Title");
                         alert.setMessage("Message");
@@ -86,9 +89,28 @@ public class MainActivity extends AppCompatActivity {
 
                         alert.setPositiveButton("Add user!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                String value = input.getText().toString();
+                                final String value = input.getText().toString().trim();
+                                final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+                                ref.addListenerForSingleValueEvent(
+                                        new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                    String email = ds.child("email").getValue(String.class);
+                                                    if(email.equals(value))
+                                                    {
+                                                        String id = FirebaseDatabase.getInstance().getReference().push().getKey();
+                                                        FirebaseDatabase.getInstance().getReference().child("contacts").child(mAuth.getUid()).child(id).setValue(email);
+                                                    }
+                                                }
+                                            }
 
-                                // Do something with value!
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                //handle databaseError
+                                            }
+                                        });
                             }
                         });
 
@@ -102,21 +124,6 @@ public class MainActivity extends AppCompatActivity {
                                 .setAction("Action", null).show();
                     }
                 });
-
-                String test_email = "david@test.com";
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
-                ref.addListenerForSingleValueEvent(
-                        new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                //handle databaseError
-                            }
-                        });
             }
         });
 

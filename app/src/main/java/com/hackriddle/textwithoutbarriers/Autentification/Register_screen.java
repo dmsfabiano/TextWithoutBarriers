@@ -80,8 +80,8 @@ public class Register_screen extends AppCompatActivity implements View.OnClickLi
                                 Preference_Manager.getInstance(Register_screen.this).userLogin(email);
                                 FirebaseDatabase db = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = db.getReference("users");
-                                myRef.child(mAuth.getUid()).setValue(email);
-                                db.getReference("contacts").push().setValue(mAuth.getUid());
+                                myRef.child(mAuth.getUid()).child("email").setValue(email);
+                                db.getReference("contacts").child(mAuth.getUid()).setValue(email);
                                 startActivity(new Intent(Register_screen.this, MainActivity.class));
                                 finish();
                             }
