@@ -31,8 +31,6 @@ import static android.R.style.Widget;
 
 public class UserFragment extends Fragment {
 
-    int tab_id;
-
     public UserFragment() {
     }
 
@@ -62,10 +60,8 @@ public class UserFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot ds: dataSnapshot.getChildren())
                         {
-                            Log.d("1234567890qwertyuiop", ds.getValue(String.class));
                             if(!dummie_list.contains(new widgetData(ds.getValue(String.class), "FUCK FIREBASE", 0)))
                             {
-                                Log.d("1234567890qwertyuiop", dummie_list.toString());
                                 dummie_list.add(new widgetData(ds.getValue(String.class), "FUCK FIREBASE", 0));
                                 adapter.notifyDataSetChanged();
 
@@ -89,7 +85,7 @@ public class UserFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            // Refresh your fragment here
+            //hello
         }
     }
 

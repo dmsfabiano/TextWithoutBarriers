@@ -11,13 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hackriddle.textwithoutbarriers.R;
 
 import java.util.ArrayList;
 
 public class BlankFragment extends Fragment {
 
-    int tab_id;
+    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
 
     public BlankFragment() {
     }
@@ -35,10 +38,11 @@ public class BlankFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
-        rv.setHasFixedSize(false);
-        ArrayList<widgetData> dummie_list = new ArrayList<>();
-        //Add to dummie list from users database
-        MyAdapter adapter = new MyAdapter( dummie_list);
+        ArrayList<conversationData> dummie_list = new ArrayList<>();
+
+        
+
+        adapterConversations adapter = new adapterConversations(dummie_list);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
