@@ -58,15 +58,15 @@ public class BlankFragment extends Fragment {
                         {
                             if(!ds.child("last").getValue(String.class).equals(""))
                             {
-                                if(!dummie_list.contains(new conversationData(ds.getValue(String.class), ds.child("last").getValue(String.class), 0)))
+                                if(!dummie_list.contains(new conversationData(ds.child("email").getValue(String.class), ds.child("last").getValue(String.class), 0)))
                                 {
-                                    dummie_list.add(new conversationData(ds.getValue(String.class), ds.child("last").getValue(String.class), 0));
+                                    dummie_list.add(new conversationData(ds.child("email").getValue(String.class), ds.child("last").getValue(String.class), 0));
                                     adapter.notifyDataSetChanged();
                                 }
                             }
-                            else if(!dummie_list.contains(new conversationData(ds.getValue(String.class), "", 0)))
+                            else if(!dummie_list.contains(new conversationData(ds.child("email").getValue(String.class), "", 0)))
                             {
-                                dummie_list.add(new conversationData(ds.getValue(String.class), "", 0));
+                                dummie_list.add(new conversationData(ds.child("email").getValue(String.class), "", 0));
                                 adapter.notifyDataSetChanged();
 
                             }

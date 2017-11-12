@@ -34,6 +34,7 @@ import com.hackriddle.textwithoutbarriers.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static android.R.attr.phoneNumber;
 import static android.R.id.input;
@@ -118,7 +119,10 @@ public class MainActivity extends AppCompatActivity {
                                                     if(email.equals(value))
                                                     {
                                                         String id = FirebaseDatabase.getInstance().getReference().push().getKey();
-                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").child(id).setValue(email);
+                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").child(id).
+                                                                child("email").setValue(email);
+                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").
+                                                                child(id).child("last").setValue("");
                                                     }
                                                 }
                                             }
