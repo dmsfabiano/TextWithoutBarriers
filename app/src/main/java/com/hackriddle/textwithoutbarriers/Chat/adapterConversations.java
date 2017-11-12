@@ -1,5 +1,7 @@
 package com.hackriddle.textwithoutbarriers.Chat;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,9 +30,9 @@ public class adapterConversations extends RecyclerView.Adapter<adapterConversati
         public CardView mCardView;
         public TextView mTextView;
         public TextView m2TextView;
+
         public MyViewHolder(View v) {
             super(v);
-
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextView = (TextView) v.findViewById(R.id.tv_text);
             m2TextView = (TextView) v.findViewById(R.id.tv_blah);
@@ -55,7 +57,7 @@ public class adapterConversations extends RecyclerView.Adapter<adapterConversati
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.mTextView.setText(mDataset.get(position).getUser_name());
         holder.m2TextView.setText(mDataset.get(position).getLast_message());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +65,9 @@ public class adapterConversations extends RecyclerView.Adapter<adapterConversati
             public void onClick(View view) {
                 String username = mDataset.get(position).getUser_name();
                 Log.d("CardView", "CardView Clicked: " + username);
+                Intent intent = new Intent(holder.itemView.getContext(),Chat_room.class);
+                intent.putExtra("email", username);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
     }
