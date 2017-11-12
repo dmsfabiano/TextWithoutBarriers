@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     class PagerAdapter extends FragmentPagerAdapter {
 
-        String tabTitles[] = new String[] { "Tab One", "Tab Two", "Tab Three" };
+        String tabTitles[] = new String[] { "CONVERSATIONS", "CONTACTS"};
         Context context;
 
         public PagerAdapter(FragmentManager fm, Context context) {
@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new BlankFragment();
                 case 1:
-                    return new BlankFragment();
-                case 2:
                     return new BlankFragment();
             }
 
