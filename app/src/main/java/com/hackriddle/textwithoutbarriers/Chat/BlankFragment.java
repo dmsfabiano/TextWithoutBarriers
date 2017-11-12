@@ -56,17 +56,17 @@ public class BlankFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot ds: dataSnapshot.getChildren())
                         {
-                            if(!ds.getValue(String.class).equals(""))
+                            if(!ds.child("last").getValue(String.class).equals(""))
                             {
-                                if(!dummie_list.contains(new conversationData(ds.getKey(), ds.getValue(String.class), 0)))
+                                if(!dummie_list.contains(new conversationData(ds.getValue(String.class), ds.child("last").getValue(String.class), 0)))
                                 {
-                                    dummie_list.add(new conversationData(ds.getKey(), ds.getValue(String.class), 0));
+                                    dummie_list.add(new conversationData(ds.getValue(String.class), ds.child("last").getValue(String.class), 0));
                                     adapter.notifyDataSetChanged();
                                 }
                             }
-                            if(!dummie_list.contains(new conversationData(ds.getKey(), "", 0)))
+                            else if(!dummie_list.contains(new conversationData(ds.getValue(String.class), "", 0)))
                             {
-                                dummie_list.add(new conversationData(ds.getKey(), "", 0));
+                                dummie_list.add(new conversationData(ds.getValue(String.class), "", 0));
                                 adapter.notifyDataSetChanged();
 
                             }
