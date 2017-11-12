@@ -22,6 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Chat.MainActivity" />
+        <activity
+            android:name=".Dialog.ViewDialog"
+            android:label="@string/title_activity_view_dialog"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
