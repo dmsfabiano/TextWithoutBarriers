@@ -10,7 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;;import com.hackriddle.textwithoutbarriers.R;
+import android.view.ViewGroup;
+import com.hackriddle.textwithoutbarriers.R;
 
 import java.util.ArrayList;
 
@@ -36,10 +37,7 @@ public class BlankFragment extends Fragment {
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(false);
         ArrayList<widgetData> dummie_list = new ArrayList<>();
-        dummie_list.add(new widgetData("Diego","are you awake",2));
-        dummie_list.add(new widgetData("David","this is going to be awesome",3));
-        dummie_list.add(new widgetData("Stephanie"," hello world ",4));
-
+        //Add to dummie list from users database
         MyAdapter adapter = new MyAdapter( dummie_list);
         rv.setAdapter(adapter);
 

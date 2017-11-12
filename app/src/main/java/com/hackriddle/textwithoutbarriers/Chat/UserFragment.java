@@ -38,10 +38,6 @@ public class UserFragment extends Fragment {
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(false);
         ArrayList<widgetData> dummie_list = new ArrayList<>();
-        dummie_list.add(new widgetData("Diego","are you !!!!!!",2));
-        dummie_list.add(new widgetData("David","!!!!!! is going to be awesome",3));
-        dummie_list.add(new widgetData("Stephanie"," hello ??? world ",4));
-
         MyAdapter adapter = new MyAdapter( dummie_list);
         rv.setAdapter(adapter);
 
