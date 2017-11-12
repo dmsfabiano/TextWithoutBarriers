@@ -18,10 +18,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/specialAccent"
             android:padding="8dp">
 
             <ImageView
                 android:id="@+id/iv_image"
+                android:src="@drawable/ic_default_user"
                 android:layout_width="120dp"
                 android:layout_height="90dp"
                 android:padding="4dp">
@@ -33,6 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="5dp"
+                android:textSize="25dp"
+                android:textStyle="normal|bold"
                 android:text="Title">
             </TextView>
 
@@ -41,7 +45,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
+                android:textSize="25dp"
+                android:textStyle="normal|bold"
                 android:text="Message">
             </TextView>
 
