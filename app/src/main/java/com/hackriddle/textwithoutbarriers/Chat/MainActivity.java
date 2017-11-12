@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                                                                 child("email").setValue(email);
                                                         FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").
                                                                 child(id).child("last").setValue("");
+                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("reciever").
+                                                                setValue(email);
                                                     }
                                                 }
                                             }

@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hackriddle.textwithoutbarriers.Functionality.Preference_Manager;
 import com.hackriddle.textwithoutbarriers.R;
 
 import java.util.ArrayList;
@@ -50,12 +51,36 @@ public class BlankFragment extends Fragment {
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms");
+        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int i = 0;
+                        for (DataSnapshot da : dataSnapshot.getChildren()) {
+                            if(da.hasChild("reciever")) {
+                                if(da.child("reciever").getValue(String.class).equals(Preference_Manager.getInstance(getContext()).getEmail()))
+                                {
+                                    if(!dummie_list.contains(new conversationData(da.child("reciever").getValue(String.class), "", 0))) {
+                                        dummie_list.add(new conversationData(da.child("reciever").getValue(String.class), "", 0));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError){
+                        //handle databaseError
+                    }
+                });
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot ds: dataSnapshot.getChildren())
-                        {
+                        int i = 0;
+                        for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                            if (i != 0) {
+                                break;
+                            }
                             if(!ds.child("last").getValue(String.class).equals(""))
                             {
                                 if(!dummie_list.contains(new conversationData(ds.child("email").getValue(String.class), ds.child("last").getValue(String.class), 0)))
@@ -70,6 +95,7 @@ public class BlankFragment extends Fragment {
                                 adapter.notifyDataSetChanged();
 
                             }
+                            i++;
                         }
                     }
 
