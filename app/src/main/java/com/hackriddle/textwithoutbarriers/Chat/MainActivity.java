@@ -32,12 +32,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.hackriddle.textwithoutbarriers.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.R.attr.phoneNumber;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +64,66 @@ public class MainActivity extends AppCompatActivity {
             tab.setCustomView(pagerAdapter.getTabView(i));
         }
 
+
         FloatingActionButton fabMsg = (FloatingActionButton) findViewById(R.id.fabMsg);
         fabMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //user input....
+                FloatingActionButton fabMsg = (FloatingActionButton) findViewById(R.id.fabPlus);
+                fabMsg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
+                        alert.setTitle("Begin a new conversation");
+                        alert.setMessage("Enter the friend you would like to chat");
+
+                        // Set an EditText view to get user input
+                        final EditText input = new EditText(MainActivity.this);
+                        alert.setView(input);
+
+                        alert.setPositiveButton("Start Chatting", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                final String value = input.getText().toString().trim();
+                                final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+                                // Before this Authentificate that the user they put is part of contacts....
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("contacts").child(mAuth.getUid());
+
+                                ref.addListenerForSingleValueEvent(
+                                        new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                    String email = ds.getValue(String.class);
+                                                    if(email.equals(value))
+                                                    {
+                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").child(value).setValue("");
+
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                //handle databaseError
+                                            }
+                                        });
+                            }
+                        });
+
+                        alert.setNegativeButton("Nevermind", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // Canceled.
+                            }
+                        });
+                        alert.show();
+                    }
+                });
             }
         });
+
         FloatingActionButton fabPlus = (FloatingActionButton) findViewById(R.id.fabPlus);
         fabPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
-                        alert.setTitle("Title");
-                        alert.setMessage("Message");
+                        alert.setTitle("Add a new friend!");
+                        alert.setMessage("Enter the email of your friend");
 
                         // Set an EditText view to get user input
                         final EditText input = new EditText(MainActivity.this);
@@ -128,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        
+
     }
 
     @Override
