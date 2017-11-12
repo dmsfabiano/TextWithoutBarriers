@@ -36,10 +36,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.R.attr.phoneNumber;
+import static android.R.id.input;
 
 public class MainActivity extends AppCompatActivity {
 
+    public String value = null;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         PagerAdapter pagerAdapter =
                 new PagerAdapter(getSupportFragmentManager(), MainActivity.this);
         viewPager.setAdapter(pagerAdapter);
@@ -70,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //user input....
-                FloatingActionButton fabMsg = (FloatingActionButton) findViewById(R.id.fabPlus);
+                FloatingActionButton fabMsg = (FloatingActionButton) findViewById(R.id.fabMsg);
                 fabMsg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -85,12 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
                         alert.setPositiveButton("Start Chatting", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                final String value = input.getText().toString().trim();
                                 final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
                                 // Before this Authentificate that the user they put is part of contacts....
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("contacts").child(mAuth.getUid());
-
+                                value = input.getText().toString().trim();
                                 ref.addListenerForSingleValueEvent(
                                         new ValueEventListener() {
                                             @Override
@@ -99,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
                                                     String email = ds.getValue(String.class);
                                                     if(email.equals(value))
                                                     {
-                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").child(value).setValue("");
-
+                                                        String id = FirebaseDatabase.getInstance().getReference().push().getKey();
+                                                        FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").child(id).setValue(email);
                                                     }
                                                 }
                                             }
