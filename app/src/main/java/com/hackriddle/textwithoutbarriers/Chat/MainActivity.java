@@ -75,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
                 fabPlus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogCustom);
 
                         alert.setTitle("Title");
                         alert.setMessage("Message");
 
                         // Set an EditText view to get user input
-                        final EditText input = new EditText(getApplicationContext());
+                        final EditText input = new EditText(MainActivity.this);
                         alert.setView(input);
 
                         alert.setPositiveButton("Add user!", new DialogInterface.OnClickListener() {
