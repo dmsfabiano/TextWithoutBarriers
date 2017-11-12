@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +13,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.hackriddle.textwithoutbarriers.Chat.MainActivity;
 import com.hackriddle.textwithoutbarriers.Functionality.Preference_Manager;
 import com.hackriddle.textwithoutbarriers.R;
-import com.hackriddle.textwithoutbarriers.Chat.Coversations;
 
 public class Register_screen extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,7 +34,7 @@ public class Register_screen extends AppCompatActivity implements View.OnClickLi
 
         // If user is already logged in then we should not be here.
         if (Preference_Manager.getInstance(this).isUserLoggedIn()) {
-            startActivity(new Intent(this, Coversations.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
@@ -77,7 +75,7 @@ public class Register_screen extends AppCompatActivity implements View.OnClickLi
                             }
                             else {
                                 Preference_Manager.getInstance(Register_screen.this).userLogin(email);
-                                startActivity(new Intent(Register_screen.this, Coversations.class));
+                                startActivity(new Intent(Register_screen.this, MainActivity.class));
                                 finish();
                             }
                         }
