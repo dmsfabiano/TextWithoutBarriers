@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 fabPlus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogCustom);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
                         alert.setTitle("Title");
                         alert.setMessage("Message");
