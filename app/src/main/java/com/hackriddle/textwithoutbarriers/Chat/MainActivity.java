@@ -1,7 +1,7 @@
 package com.hackriddle.textwithoutbarriers.Chat;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,10 +16,19 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hackriddle.textwithoutbarriers.R;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import static android.R.attr.phoneNumber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,45 +60,32 @@ public class MainActivity extends AppCompatActivity {
         fabMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
             }
         });
-
         FloatingActionButton fabPlus = (FloatingActionButton) findViewById(R.id.fabPlus);
         fabPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
+                //user input....
+                String test_email = "david@test.com";
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+                ref.addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                alert.setTitle("Title");
-                alert.setMessage("Message");
+                            }
 
-                // Set an EditText view to get user input
-                final EditText input = new EditText(getApplicationContext());
-                alert.setView(input);
-
-                alert.setPositiveButton("Add user!", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String value = input.getText().toString();
-
-                        // Do something with value!
-                    }
-                });
-
-                alert.setNegativeButton("Take me back!", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // Canceled.
-                    }
-                });
-                alert.show();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                //handle databaseError
+                            }
+                        });
             }
         });
 
     }
-
 
     @Override
     public void onResume() {
