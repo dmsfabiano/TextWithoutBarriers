@@ -17,10 +17,13 @@ import android.text.format.DateFormat;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.hackriddle.textwithoutbarriers.R;
 
 
@@ -104,8 +107,15 @@ public class Chat extends AppCompatActivity {
     private void displayChatMessage() {
 
         ListView listOfMessage = (ListView)findViewById(R.id.list_of_messages);
-        adapter = new FirebaseListAdapter<ChatMessage>(this,ChatMessage.class,R.layout.list_item,FirebaseDatabase.getInstance().getReference())
-        {
+
+        Query query = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseListOptions<ChatMessage> options =
+                new FirebaseListOptions.Builder<ChatMessage>()
+                        .setQuery(query, ChatMessage.class)
+                        .setLayout(android.R.layout.list_content)
+                        .build();
+        adapter = new FirebaseListAdapter<ChatMessage>(options){
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
 
