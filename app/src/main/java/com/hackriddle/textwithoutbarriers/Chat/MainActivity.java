@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fabPlus = (FloatingActionButton) findViewById(R.id.fabPlus);
         fabPlus.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
