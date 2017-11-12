@@ -57,7 +57,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.mTextView.setText(mDataset.get(position).getUser_name());
         holder.m2TextView.setText(mDataset.get(position).getLast_message());
-
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

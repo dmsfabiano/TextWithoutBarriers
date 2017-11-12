@@ -1,24 +1,26 @@
 package com.hackriddle.textwithoutbarriers.Chat;
 
-/**
- * Created by david on 11/11/17.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;;import com.hackriddle.textwithoutbarriers.R;
+import android.view.ViewGroup;
+
+import com.hackriddle.textwithoutbarriers.R;
 
 import java.util.ArrayList;
 
-public class BlankFragment extends Fragment {
+/**
+ * Created by david on 11/11/17.
+ */
+
+public class UserFragment extends Fragment {
 
     int tab_id;
 
-    public BlankFragment() {
+    public UserFragment() {
     }
 
     @Override
@@ -36,9 +38,9 @@ public class BlankFragment extends Fragment {
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(false);
         ArrayList<widgetData> dummie_list = new ArrayList<>();
-        dummie_list.add(new widgetData("Diego","are you awake",2));
-        dummie_list.add(new widgetData("David","this is going to be awesome",3));
-        dummie_list.add(new widgetData("Stephanie"," hello world ",4));
+        dummie_list.add(new widgetData("Diego","are you !!!!!!",2));
+        dummie_list.add(new widgetData("David","!!!!!! is going to be awesome",3));
+        dummie_list.add(new widgetData("Stephanie"," hello ??? world ",4));
 
         MyAdapter adapter = new MyAdapter( dummie_list);
         rv.setAdapter(adapter);
