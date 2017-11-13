@@ -57,7 +57,7 @@ public class Chat_room extends AppCompatActivity {
             public void onClick(View view) {
                 id = FirebaseDatabase.getInstance().getReference().push().getKey();
 
-                String email = Preference_Manager.getInstance(Chat_room.this).getEmail();
+                final String email = Preference_Manager.getInstance(Chat_room.this).getEmail();
 
                 FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(
                         new ValueEventListener() {
@@ -65,11 +65,10 @@ public class Chat_room extends AppCompatActivity {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 Boolean roomExist = false;
                                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                                    String r = ds.child("reciever").getValue(String.class);
                                     if (dataSnapshot.hasChild("reciever")) {
-                                        if (r.equals(user_we_are_talking)) {
+                                        String r = ds.child("reciever").getValue(String.class);
+                                        if (r.equals(email)) {
                                             dsKey = ds.getKey();
-                                            Log.d("DSKEY1", ds.getKey());
                                             ref = FirebaseDatabase.getInstance().getReference().child("users").child(ds.getKey()).child("rooms").child(id);
                                             ref.child("email_talking_to").setValue(user_we_are_talking);
                                             ref.child("MSG").setValue(input_message.getText().toString());
@@ -80,7 +79,6 @@ public class Chat_room extends AppCompatActivity {
                                 }
                                 if (!roomExist) {
                                     dsKey = mAuth.getUid();
-                                    Log.d("DSKEY2", dsKey);
                                     ref = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("rooms").child(id);
                                     ref.child("email_talking_to").setValue(user_we_are_talking);
                                     ref.child("MSG").setValue(input_message.getText().toString());

@@ -61,7 +61,8 @@ public class BlankFragment extends Fragment {
                                 if(da.child("reciever").getValue(String.class).equals(Preference_Manager.getInstance(getContext()).getEmail()))
                                 {
                                     if(!dummie_list.contains(new conversationData(da.child("reciever").getValue(String.class), "", 0))) {
-                                        dummie_list.add(new conversationData(da.child("reciever").getValue(String.class), "", 0));
+                                        dummie_list.add(new conversationData(da.child("email").getValue(String.class), "", 0));
+                                        adapter.notifyDataSetChanged();
                                     }
                                 }
                             }
